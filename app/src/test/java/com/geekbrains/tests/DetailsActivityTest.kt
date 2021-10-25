@@ -46,7 +46,7 @@ class DetailsActivityTest {
     @Test
     fun activityTextView_NotNull() {
         scenario.onActivity {
-            val totalCountTextView = it.findViewById<TextView>(R.id.totalCountTextView)
+            val totalCountTextView = it.findViewById<TextView>(TOTAL_COUNT_ID)
             assertNotNull(totalCountTextView)
         }
     }
@@ -54,7 +54,7 @@ class DetailsActivityTest {
     @Test
     fun activityTextView_HasText() {
         scenario.onActivity {
-            val totalCountTextView = it.findViewById<TextView>(R.id.totalCountTextView)
+            val totalCountTextView = it.findViewById<TextView>(TOTAL_COUNT_ID)
             assertEquals(TEST_NUMBER_OF_RESULTS_ZERO, totalCountTextView.text)
         }
     }
@@ -62,7 +62,7 @@ class DetailsActivityTest {
     @Test
     fun activityTextView_IsVisible() {
         scenario.onActivity {
-            val totalCountTextView = it.findViewById<TextView>(R.id.totalCountTextView)
+            val totalCountTextView = it.findViewById<TextView>(TOTAL_COUNT_ID)
             assertEquals(View.VISIBLE, totalCountTextView.visibility)
         }
     }
@@ -82,7 +82,7 @@ class DetailsActivityTest {
     fun activityButtonIncrement_IsWorking() {
         scenario.onActivity {
             val incrementButton = it.findViewById<Button>(R.id.incrementButton)
-            val totalCountTextView = it.findViewById<TextView>(R.id.totalCountTextView)
+            val totalCountTextView = it.findViewById<TextView>(TOTAL_COUNT_ID)
             incrementButton.performClick()
 
             assertEquals(TEST_NUMBER_OF_RESULTS_PLUS_1, totalCountTextView.text)
@@ -93,7 +93,7 @@ class DetailsActivityTest {
     fun activityButtonDecrement_IsWorking() {
         scenario.onActivity {
             val decrementButton = it.findViewById<Button>(R.id.decrementButton)
-            val totalCountTextView = it.findViewById<TextView>(R.id.totalCountTextView)
+            val totalCountTextView = it.findViewById<TextView>(TOTAL_COUNT_ID)
             decrementButton.performClick()
 
             assertEquals(TEST_NUMBER_OF_RESULTS_MINUS_1, totalCountTextView.text)
