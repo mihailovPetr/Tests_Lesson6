@@ -3,15 +3,9 @@ package com.geekbrains.tests.espresso
 import android.widget.TextView
 import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.geekbrains.tests.R
-import com.geekbrains.tests.TEST_NUMBER_OF_RESULTS_MINUS_1
-import com.geekbrains.tests.TEST_NUMBER_OF_RESULTS_PLUS_1
-import com.geekbrains.tests.TEST_NUMBER_OF_RESULTS_ZERO
+import com.geekbrains.tests.*
 import com.geekbrains.tests.view.details.DetailsActivity
 import junit.framework.TestCase
 import org.junit.After
@@ -44,43 +38,42 @@ class DetailsActivityEspressoTest {
     @Test
     fun activityTextView_NotNull() {
         scenario.onActivity {
-            val totalCountTextView = it.findViewById<TextView>(R.id.totalCountTextView)
+            val totalCountTextView = it.findViewById<TextView>(TOTAL_COUNT_ID)
             TestCase.assertNotNull(totalCountTextView)
         }
     }
 
     @Test
     fun activityTextView_HasText() {
-        val assertion = matches(withText(TEST_NUMBER_OF_RESULTS_ZERO))
-        onView(withId(R.id.totalCountTextView)).check(assertion)
+        onViewMatches(TOTAL_COUNT_ID) { withText(TEST_NUMBER_OF_RESULTS_ZERO) }
     }
 
     @Test
     fun activityTextView_IsDisplayed() {
-        onView(withId(R.id.totalCountTextView)).check(matches(isDisplayed()))
+        onViewMatches(TOTAL_COUNT_ID) { isDisplayed() }
     }
 
     @Test
     fun activityTextView_IsCompletelyDisplayed() {
-        onView(withId(R.id.totalCountTextView)).check(matches(isCompletelyDisplayed()))
+        onViewMatches(TOTAL_COUNT_ID) { isCompletelyDisplayed() }
     }
 
     @Test
     fun activityButtons_AreEffectiveVisible() {
-        onView(withId(R.id.incrementButton)).check(matches(withEffectiveVisibility(Visibility.VISIBLE)))
-        onView(withId(R.id.decrementButton)).check(matches(withEffectiveVisibility(Visibility.VISIBLE)))
+        onViewMatches(R.id.incrementButton) { withEffectiveVisibility(Visibility.VISIBLE) }
+        onViewMatches(R.id.decrementButton) { withEffectiveVisibility(Visibility.VISIBLE) }
     }
 
     @Test
     fun activityButtonIncrement_IsWorking() {
-        onView(withId(R.id.incrementButton)).perform(click())
-        onView(withId(R.id.totalCountTextView)).check(matches(withText(TEST_NUMBER_OF_RESULTS_PLUS_1)))
+        clickOnView(R.id.incrementButton)
+        onViewMatches(TOTAL_COUNT_ID) { withText(TEST_NUMBER_OF_RESULTS_PLUS_1) }
     }
 
     @Test
     fun activityButtonDecrement_IsWorking() {
-        onView(withId(R.id.decrementButton)).perform(click())
-        onView(withId(R.id.totalCountTextView)).check(matches(withText(TEST_NUMBER_OF_RESULTS_MINUS_1)))
+        clickOnView(R.id.decrementButton)
+        onViewMatches(TOTAL_COUNT_ID) { withText(TEST_NUMBER_OF_RESULTS_MINUS_1) }
     }
 
     @After
